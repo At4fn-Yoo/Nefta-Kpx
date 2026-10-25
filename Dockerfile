@@ -1,4 +1,4 @@
-# 1. Base Image (Ubuntu Latest)
+# 1. Base Image (Ubuntu 24.04 Latest)
 FROM ubuntu:24.04
 
 # 2. Environment Variables
@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     TZ=Asia/Dhaka \
     LANG=C.UTF-8
 
-# 3. Install System Dependencies (Latest)
+# 3. Install System Dependencies & Python 3.14 (via PPA)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     software-properties-common \
     curl \
@@ -24,29 +24,35 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libffi-dev \
     python3-dev \
     python3-pip \
-    python3-venv \
+    && add-apt-repository ppa:deadsnakes/ppa -y \
+    && apt-get update \
+    && apt-get install -y python3.14 python3.14-dev python3.14-venv \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# 4. Install Latest yt-dlp (Binary)
+# 4. Set Python 3.14 as default
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.14 1 \
+    && update-alternatives --install /usr/bin/python python /usr/bin/python3.14 1
+
+# 5. Install Latest yt-dlp
 RUN curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp \
     && chmod a+rx /usr/local/bin/yt-dlp
 
-# 5. Upgrade pip and install uv (Fast package installer)
-RUN pip3 install --break-system-packages --upgrade pip setuptools wheel uv
+# 6. Upgrade pip and install uv
+RUN python3 -m pip install --upgrade pip setuptools wheel uv
 
-# 6. Set Working Directory
+# 7. Set Working Directory
 WORKDIR /usr/src/app
 
-# 7. Install Python Requirements
+# 8. Install Python Requirements
 COPY requirements.txt .
-RUN uv pip install --system --break-system-packages --no-cache -r requirements.txt
+RUN uv pip install --system --no-cache -r requirements.txt
 
-# 8. Copy Bot Code
+# 9. Copy Bot Code
 COPY . .
 
-# 9. Expose Port for Heroku
+# 10. Expose Port for Heroku
 EXPOSE 8080
 
-# 10. Start Command
+# 11. Start Command
 ENTRYPOINT ["bash", "start.sh"]

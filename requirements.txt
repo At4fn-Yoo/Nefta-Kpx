@@ -4,7 +4,6 @@ aioshutil
 anytree==2.8.0
 apscheduler
 aria2p
-asyncio
 beautifulsoup4
 imdbio
 cloudscraper
@@ -31,7 +30,7 @@ psutil
 pybase64
 pycountry
 pymongo
-pyrofork==2.2.11
+pyrofork==2.3.5
 python-dotenv
 python-magic
 qbittorrent-api

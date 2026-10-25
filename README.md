@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="https://te.legra.ph/file/8086f391e542ed5c6a4c2.jpg" alt="Nefta-Kpx Logo" width="400">
-</p>
-
 <h2 align="center">Nefta-Kpx</h2>
 
 <p align="center">

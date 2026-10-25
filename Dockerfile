@@ -1,8 +1,11 @@
-FROM mysterysd/wzmlx:wzadv
-# COPY --from=mysterysd/wzmlx:m-tools /usr/local /usr/local
+FROM ssbots/ssbots_heroku:latest
 
 WORKDIR /usr/src/app
+RUN chmod 777 /usr/src/app
+
+COPY requirements.txt .
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-ENTRYPOINT ["bash", "start.sh"]
+CMD ["bash", "start.sh"]

@@ -18,6 +18,9 @@ RUN pip3 install --break-system-packages --upgrade pip setuptools wheel uv
 
 WORKDIR /usr/src/app
 
+# Fix for xon-bit missing in some bots
+RUN ln -sf /usr/bin/qbittorrent-nox /usr/bin/xon-bit
+
 COPY requirements.txt .
 RUN uv pip install --system --break-system-packages --no-cache -r requirements.txt
 

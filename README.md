@@ -31,7 +31,7 @@
 - **Multi-Engine Support:** Aria2, qBittorrent, yt-dlp, JDownloader, rclone, and more.
 - **Cloud Upload:** Google Drive, Telegram, Rclone, DDL servers.
 - **Torrent Support:** Advanced torrent downloading with file selection.
-- **Direct Link Extractors:** Supports HubCloud, GDflix, Gofile, Pixeldrain, etc. (depending on extractor updates).
+- **Direct Link Extractors:** Supports HubCloud, GDflix, Gofile, Pixeldrain, etc.
 - **Customizable UI:** Themes, bot stats, and personal settings.
 - **Queue System:** Prevents server overload and ensures stable downloading.
 </details>
